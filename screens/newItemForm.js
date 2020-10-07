@@ -4,13 +4,12 @@ import { StyleSheet, Text, View, Button, TouchableWithoutFeedback, Keyboard, Tex
 function NewItemForm({ route, navigation, navigation: { setParams } }) {
     const [ location, setLocation ] = useState("")
 
-    const { lineItems  } = route.params
+    const { lineItems } = route.params
 
     const pressHandler = () => {
-        setParams({lineItems: lineItems+location})
-        setTimeout(navigation.goBack(), 3000)
-        // navigation.goBack()
+        navigation.navigate('ProjectIndex', {oldList: lineItems, newItem: location})
     }
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>

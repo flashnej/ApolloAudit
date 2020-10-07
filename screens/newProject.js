@@ -8,7 +8,6 @@ function NewProject({ navigation }) {
   const [ address, setAddress ] = useState("")
   const [ city, setCity ] = useState("")
   const [ sqFt, setSqFt ] = useState()
-  const [ lineItems, setLineItems ] = useState([])
 
   const pressHandler = () => {
     navigation.navigate('ProjectIndex', {
@@ -18,7 +17,7 @@ function NewProject({ navigation }) {
         address: address,
         city: city,
         sqFt: sqFt,
-        lineItems: lineItems
+        newItem: null
     })
 }
 

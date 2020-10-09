@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import {projectStore} from './../ProjectStore'
 
 function Home ({ navigation }) {
 

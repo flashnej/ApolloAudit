@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TouchableWithoutFeedback, Keyboard, TextInput } from 'react-native';
+import { projectStore } from './../ProjectStore';
 
 function NewItemForm({ route, navigation, navigation: { setParams } }) {
     const [ location, setLocation ] = useState("")
-
-    const { lineItems } = route.params
+    const [ existingCode, setExistingCode ] = useState("")
 
     const pressHandler = () => {
-        navigation.navigate('ProjectIndex', {oldList: lineItems, newItem: location})
+        let id = projectStore.auditDetails.lineItems.length
+        projectStore.auditDetails.lineItems.push({key: id, location: location, existingCode: existingCode})
+        navigation.navigate('ProjectIndex')
     }
 
   return (
@@ -19,7 +21,12 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
             style={styles.input}
             onChangeText={(val) => setLocation(val)} />
         </View>
-        <Text> {lineItems}</Text>
+        <View style={styles.field}>
+        <Text>Existing Code:</Text>
+          <TextInput
+              style={styles.input}
+              onChangeText={(val) => setExistingCode(val)} />
+        </View>
         <View style={styles.button}>
          <Button title='Add Item' onPress={pressHandler}/>
       </View>

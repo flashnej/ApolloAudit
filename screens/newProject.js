@@ -16,38 +16,38 @@ function NewProject({ navigation }) {
           <Text>Project Name:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => projectStore.projectName= val} />
+            onChangeText={(val) => projectStore.auditDetails.projectName= val} />
         </View>
         <View style={styles.field}>
           <Text>Contact Name: </Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => projectStore.contactName= val} />
+            onChangeText={(val) => projectStore.auditDetails.contactName= val} />
         </View>
         <View style={styles.field}>
           <Text>Phone Number: </Text>
           <TextInput
             style={styles.input}
             keyboardType='number-pad'
-            onChangeText={(val) => projectStore.phoneNumber = val} />
+            onChangeText={(val) => projectStore.auditDetails.phoneNumber = val} />
         </View>
         <View style={styles.field}>
           <Text>Address</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => projectStore.address = val} />
+            onChangeText={(val) => projectStore.auditDetails.address = val} />
         </View>
         <View style={styles.field}>
           <Text>City, Zip:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => projectStore.city = val} />
+            onChangeText={(val) => projectStore.auditDetails.city = val} />
         </View>
         <View style={styles.field}>
           <Text>Square Feet</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => projectStore.city = val}
+            onChangeText={(val) => projectStore.auditDetails.city = val}
             keyboardType='number-pad' />
         </View>
         <View style={styles.button}>

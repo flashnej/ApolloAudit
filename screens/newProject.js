@@ -1,65 +1,53 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, Keyboard, Button } from 'react-native';
+import {projectStore} from './../ProjectStore'
 
 function NewProject({ navigation }) {
-  const [ projectName, setProjectName ] = useState("")
-  const [ contactName, setContactName ] = useState("")
-  const [ phoneNumber, setPhoneNumber ] = useState()
-  const [ address, setAddress ] = useState("")
-  const [ city, setCity ] = useState("")
-  const [ sqFt, setSqFt ] = useState()
 
   const pressHandler = () => {
-    navigation.navigate('ProjectIndex', {
-        projectName: projectName,
-        contactName: contactName,
-        phoneNumber: phoneNumber,
-        address: address,
-        city: city,
-        sqFt: sqFt,
-        newItem: null
-    })
+    navigation.navigate('ProjectIndex')
 }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
+        <Text>{projectStore.projectName}</Text>
         <View style={styles.field}>
           <Text>Project Name:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => setProjectName(val)} />
+            onChangeText={(val) => projectStore.projectName= val} />
         </View>
         <View style={styles.field}>
           <Text>Contact Name: </Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => setContactName(val)} />
+            onChangeText={(val) => projectStore.contactName= val} />
         </View>
         <View style={styles.field}>
           <Text>Phone Number: </Text>
           <TextInput
             style={styles.input}
             keyboardType='number-pad'
-            onChangeText={(val) => setPhoneNumber(val)} />
+            onChangeText={(val) => projectStore.phoneNumber = val} />
         </View>
         <View style={styles.field}>
           <Text>Address</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => setAddress(val)} />
+            onChangeText={(val) => projectStore.address = val} />
         </View>
         <View style={styles.field}>
           <Text>City, Zip:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => setCity(val)} />
+            onChangeText={(val) => projectStore.city = val} />
         </View>
         <View style={styles.field}>
           <Text>Square Feet</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => setCity(val)}
+            onChangeText={(val) => projectStore.city = val}
             keyboardType='number-pad' />
         </View>
         <View style={styles.button}>

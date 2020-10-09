@@ -1,7 +1,9 @@
-import React from 'react';
+import { observer } from 'mobx-react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import {projectStore} from './../ProjectStore'
 
-function Home({ navigation }) {
+function Home ({ navigation }) {
 
     const pressHandler = () => {
         navigation.push('NewProject')
@@ -27,4 +29,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
   },
 });
-export default Home
+export default observer(Home)

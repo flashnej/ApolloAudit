@@ -6,6 +6,7 @@ import Home from './screens/home.js'
 import NewProject from './screens/newProject.js'
 import ProjectIndex from './screens/projectIndex.js'
 import NewItemForm from './screens/newItemForm.js'
+import { observer } from 'mobx-react';
 
 const Stack = createStackNavigator();
 
@@ -45,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App
+export default observer(App)

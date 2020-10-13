@@ -16,18 +16,21 @@ function NewProject({ navigation }) {
           <Text>Project Name:</Text>
           <TextInput
             style={styles.input}
+            defaultValue={projectStore.auditDetails.projectName}
             onChangeText={(val) => projectStore.auditDetails.projectName= val} />
         </View>
         <View style={styles.field}>
           <Text>Contact Name: </Text>
           <TextInput
             style={styles.input}
+            defaultValue={projectStore.auditDetails.contactName}
             onChangeText={(val) => projectStore.auditDetails.contactName= val} />
         </View>
         <View style={styles.field}>
           <Text>Phone Number: </Text>
           <TextInput
             style={styles.input}
+            defaultValue={projectStore.auditDetails.phoneNumber}
             keyboardType='number-pad'
             onChangeText={(val) => projectStore.auditDetails.phoneNumber = val} />
         </View>
@@ -35,19 +38,22 @@ function NewProject({ navigation }) {
           <Text>Address</Text>
           <TextInput
             style={styles.input}
+            defaultValue={projectStore.auditDetails.address}
             onChangeText={(val) => projectStore.auditDetails.address = val} />
         </View>
         <View style={styles.field}>
           <Text>City, Zip:</Text>
           <TextInput
             style={styles.input}
+            defaultValue={projectStore.auditDetails.city}
             onChangeText={(val) => projectStore.auditDetails.city = val} />
         </View>
         <View style={styles.field}>
           <Text>Square Feet</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => projectStore.auditDetails.city = val}
+            defaultValue={projectStore.auditDetails.sfFt}
+            onChangeText={(val) => projectStore.auditDetails.sqFt = val}
             keyboardType='number-pad' />
         </View>
         <View style={styles.button}>

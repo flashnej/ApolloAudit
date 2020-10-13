@@ -4,12 +4,18 @@ import { projectStore } from './../ProjectStore';
 
 function NewItemForm({ route, navigation, navigation: { setParams } }) {
     const [ location, setLocation ] = useState("")
+    const [ hours, setHours ] = useState("")
     const [ existingCode, setExistingCode ] = useState("")
+    const [ proposedCode, setProposedCode ] = useState("")
+    const [ existingQty, setExistingQty ] = useState(0)
+    const [ proposedQty, setProposedQty ] = useState(0)
+    const [ volt, setVolt ] = useState(12)
 
     const pressHandler = () => {
-        let id = projectStore.auditDetails.lineItems.length
-        projectStore.auditDetails.lineItems.push({key: id, location: location, existingCode: existingCode})
-        navigation.navigate('ProjectIndex')
+      if (location != "" || existingCode != "" || proposedCode != "") {
+        projectStore.auditDetails.lineItems.push([location, hours, existingCode, existingQty, proposedCode,proposedQty, volt])
+      }
+      navigation.navigate('ProjectIndex')
     }
 
   return (
@@ -19,17 +25,42 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
           <Text>Location:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => setLocation(val)} />
+            onChangeText={(val) => setLocation(val)}
+          />
         </View>
         <View style={styles.field}>
-        <Text>Existing Code:</Text>
+          <Text>Existing Code:</Text>
           <TextInput
-              style={styles.input}
-              onChangeText={(val) => setExistingCode(val)} />
+            style={styles.input}
+            onChangeText={(val) => setExistingCode(val)}
+          />
+          <View style={styles.qtyArea}>
+            <Text>Hrs/Yr:</Text>
+            <View style={styles.qtyInput}>
+              <TextInput
+                style={styles.input}
+                onChangeText={(val) => setHours(val)}
+              />
+            </View>
+          </View>
+        </View>
+        <View style={styles.field}>
+          <Text>Proposed Code:</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(val) => setProposedCode(val)}
+          />
+        </View>
+        <View style={styles.field}>
+          <Text>Voltage:</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(val) => setVolt(val)}
+          />
         </View>
         <View style={styles.button}>
          <Button title='Add Item' onPress={pressHandler}/>
-      </View>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -53,6 +84,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#777',
     width: 200,
+  },
+  qtyInput: {
+    width: 10
+  },
+  qtyArea: {
+    width: 50
   }
 });
 export default NewItemForm

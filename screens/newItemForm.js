@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TouchableWithoutFeedback, Keyboard, TextInput } from 'react-native';
 import { projectStore } from './../ProjectStore';
+import { observable, action } from "mobx"
 
 function NewItemForm({ route, navigation, navigation: { setParams } }) {
     const [ location, setLocation ] = useState("")
@@ -11,7 +12,7 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
     const [ proposedQty, setProposedQty ] = useState(0)
     const [ volt, setVolt ] = useState(12)
 
-    const pressHandler = () => {
+    const pressHandler = ()=> {
       if (location != "" || existingCode != "" || proposedCode != "") {
         projectStore.auditDetails.lineItems.push([location, hours, existingCode, existingQty, proposedCode,proposedQty, volt])
       }

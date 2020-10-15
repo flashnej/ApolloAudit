@@ -15,6 +15,7 @@ const TableRow =  (props) => {
     widthArr={props.widthArr}
     style={[styles.row, props.index%2 && {backgroundColor: 'grey'}]}
     borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}
+    textStyle={styles.text}
   />
   );
 }
@@ -22,6 +23,9 @@ const TableRow =  (props) => {
 const styles = StyleSheet.create({
     row: {
       backgroundColor: 'white'
+    },
+    text: {
+      fontSize: 20,
     }
   });
 

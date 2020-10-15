@@ -8,7 +8,7 @@ import TableRow from './TableRow'
 
 function ProjectIndex({ route, navigation, navigation: { setParams } }) {
 
-  let widthArr = [100, 40, 100, 40, 100, 40, 60]
+  let widthArr = [200, 40, 100, 110, 100, 40, 60]
 
     const pressHandler = () => {
         navigation.navigate('NewItemForm')
@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    fontWeight: '600'
+    fontWeight: '600',
+    fontSize: 20,
   },
   image: {
     alignItems: 'center',

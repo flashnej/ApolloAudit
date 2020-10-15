@@ -7,11 +7,14 @@ class ProjectStore {
 
     @observable auditDetails =  {
         projectName: "",
+        clientName: "",
         contactName: "",
         phoneNumber: "",
         address: "",
         city: "",
         sqFt: "",
+        utility:"",
+        acctNum:"",
         }
     }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, ScrollView, Image } from 'react-native';
 import { observer } from 'mobx-react';
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import {projectStore} from './../ProjectStore'
 import Logo from '../assets/Logo.jpg'
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -44,6 +44,7 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
       <View style={styles.image}>
        <Image source={Logo}/>
       </View>
+      <Text>{projectStore.auditDetails.utility}</Text>
       <Text> {projectStore.auditDetails.projectName}</Text>
       <ScrollView horizontal={true}>
         <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>

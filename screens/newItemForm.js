@@ -35,15 +35,13 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
             style={styles.input}
             onChangeText={(val) => setExistingCode(val)}
           />
-          <View style={styles.qtyArea}>
+          </View>
+          <View style={styles.field}>
             <Text>Hrs/Yr:</Text>
-            <View style={styles.qtyInput}>
               <TextInput
                 style={styles.input}
                 onChangeText={(val) => setHours(val)}
               />
-            </View>
-          </View>
         </View>
         <View style={styles.field}>
           <Text>Proposed Code:</Text>

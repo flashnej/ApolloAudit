@@ -8,14 +8,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function ProjectIndex({ route, navigation, navigation: { setParams } }) {
 
-  let widthArr = [200, 40, 100, 110, 100, 40, 60]
+  let widthArr = [200, 40, 100, 110, 100, 40, 60, 300]
 
     const pressHandler = () => {
         navigation.navigate('NewItemForm')
     }
 
     if (!projectStore.auditDetails.lineItems) {
-      projectStore.auditDetails.tableHeaders = ["Location", "Hrs/Yr", "Existing Code", "Qty", "Proposed Code", "Qty", "Volt", "Comments"]
+      projectStore.auditDetails.tableHeaders = ["Location", "Hrs/Yr", "Existing Code", "Qty", "Proposed Code", "Qty", "Volt", "Notes"]
       projectStore.auditDetails.lineItems = []
     }
 

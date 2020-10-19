@@ -19,7 +19,7 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
       projectStore.auditDetails.lineItems = []
     }
 
-    const element = (data, index) => (
+    const incrementExistingQty = (data, index) => (
       <View style={styles.qty}>
       <TouchableOpacity onPress={() => decrease(index)}>
           <Text style={styles.downIncrement}>-  </Text>
@@ -52,10 +52,10 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
           <ScrollView verticle={true}>
             {
               projectStore.auditDetails.lineItems.map((lineItem, index) => (
-                <TableWrapper key={index} style={index%2? styles.lightRow : styles.row}>
+                <TableWrapper key={index} style={index%2 ? styles.lightRow : styles.row}>
                   {
                     lineItem.map((cellData, cellIndex) => (
-                      <Cell key={cellIndex} data={cellIndex === 3 ? element(cellData, index) : cellData} width={widthArr[cellIndex]}/>
+                      <Cell key={cellIndex} data={cellIndex === 3 ? incrementExistingQty(cellData, index) : cellData} width={widthArr[cellIndex]}/>
                     ))
                   }
                 </TableWrapper>

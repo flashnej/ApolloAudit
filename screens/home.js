@@ -9,7 +9,6 @@ function Home ({ navigation }) {
     }
   return (
     <View style={styles.container}>
-      <Text>Home!!</Text>
       <View style={styles.button}>
          <Button title='Start a Project' onPress={pressHandler}/>
       </View>

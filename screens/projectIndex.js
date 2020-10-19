@@ -8,7 +8,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function ProjectIndex({ route, navigation, navigation: { setParams } }) {
 
-  let widthArr = [200, 40, 100, 110, 100, 40, 60, 300]
+  let widthArr = [200, 40, 100, 110, 100, 110, 60, 300]
 
     const pressHandler = () => {
         navigation.navigate('NewItemForm')
@@ -19,24 +19,36 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
       projectStore.auditDetails.lineItems = []
     }
 
-    const incrementExistingQty = (data, index) => (
+    const incrementExistingQty = (data, lineNumber, cellIndex) => (
       <View style={styles.qty}>
-      <TouchableOpacity onPress={() => decrease(index)}>
+      <TouchableOpacity onPress={() => decrease(lineNumber, cellIndex)}>
           <Text style={styles.downIncrement}>-  </Text>
       </TouchableOpacity>
       <Text>{data}</Text>
-      <TouchableOpacity onPress={() => increase(index)}>
+      <TouchableOpacity onPress={() => increase(lineNumber, cellIndex)}>
         <Text style={styles.upIncrement}>  +</Text>
       </TouchableOpacity>
       </View>
     )
 
-    const increase = (index) => {
-      projectStore.auditDetails.lineItems[index][3]++
+    const incrementSuggestedQty = (data, lineNumber, cellIndex) => (
+      <View style={styles.qty}>
+      <TouchableOpacity onPress={() => decrease(lineNumber, cellIndex)}>
+          <Text style={styles.downIncrement}>-  </Text>
+      </TouchableOpacity>
+      <Text>{data}</Text>
+      <TouchableOpacity onPress={() => increase(lineNumber, cellIndex)}>
+        <Text style={styles.upIncrement}>  +</Text>
+      </TouchableOpacity>
+      </View>
+    )
+
+    const increase = (lineNumber, cellIndex) => {
+      projectStore.auditDetails.lineItems[lineNumber][cellIndex]++
     }
 
-    const decrease = (index) => {
-      projectStore.auditDetails.lineItems[index][3]--
+    const decrease = (lineNumber, cellIndex) => {
+      projectStore.auditDetails.lineItems[lineNumber][cellIndex]--
     }
 
   return (
@@ -51,11 +63,11 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
           <Row data={projectStore.auditDetails.tableHeaders} widthArr={widthArr} style={styles.header} textStyle={styles.text}/>
           <ScrollView verticle={true}>
             {
-              projectStore.auditDetails.lineItems.map((lineItem, index) => (
-                <TableWrapper key={index} style={index%2 ? styles.lightRow : styles.row}>
+              projectStore.auditDetails.lineItems.map((lineItem, lineNumber) => (
+                <TableWrapper key={lineNumber} style={lineNumber%2 ? styles.lightRow : styles.row}>
                   {
                     lineItem.map((cellData, cellIndex) => (
-                      <Cell key={cellIndex} data={cellIndex === 3 ? incrementExistingQty(cellData, index) : cellData} width={widthArr[cellIndex]}/>
+                      <Cell key={cellIndex} data={ cellIndex === 3 ? incrementExistingQty(cellData, lineNumber, cellIndex) : cellIndex === 5 ? incrementSuggestedQty(cellData, lineNumber, cellIndex) : cellData} width={widthArr[cellIndex] }/>
                     ))
                   }
                 </TableWrapper>

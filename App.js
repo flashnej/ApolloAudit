@@ -8,6 +8,7 @@ import ProjectIndex from './screens/projectIndex.js'
 import NewItemForm from './screens/newItemForm.js'
 import { observer } from 'mobx-react';
 import Logo from './assets/Logo.jpg'
+import {projectStore} from './ProjectStore'
 import Export from './screens/export'
 
 const Stack = createStackNavigator();
@@ -28,7 +29,7 @@ function App() {
         <Stack.Screen
           name="ProjectIndex"
           component={ProjectIndex}
-          options={{ headerRight: props => <Export />}}
+          options={{ headerRight: props => <Export data={projectStore}/>}}
         />
       <Stack.Screen
           name="NewItemForm"

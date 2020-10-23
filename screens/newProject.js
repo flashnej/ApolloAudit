@@ -6,7 +6,7 @@ import SelectPicker from 'react-native-form-select-picker'
 function NewProject({ navigation }) {
   const [ utility, setUtility ] = useState('')
 
-  const utilityOptions = ["EnergySource", "National Grid", "Other"]
+  const utilityOptions = ["Eversource", "National Grid", "Other"]
 
   const pressHandler = () => {
     navigation.navigate('ProjectIndex')

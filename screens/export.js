@@ -8,18 +8,18 @@ function Export ({ navigation }) {
     const pressHandler = () => {
         console.log("Exporting to Excel...")
         // fetch('https://fathomless-fortress-53529.herokuapp.com/api/v1/projects', {
-        // fetch('http://localhost:3000/api/v1/projects', {
-        //   method: 'POST',
-        //   headers: {
-        //     Accept: 'application/json',
-        //     'Content-Type': 'application/json'
-        //   },
-        //   body: JSON.stringify( projectStore.auditDetails )
-        // })
-        // .then((response)=> response.json())
-        // .then((json) => {
-        //   console.log(json[status])
-        // })
+        fetch('http://localhost:3000/api/v1/projects', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify( projectStore.auditDetails )
+        })
+        .then((response)=> response.json())
+        .then((json) => {
+          console.log(json[status])
+        })
         Alert.alert(
           "Project Exported",
           "Check email address provided",

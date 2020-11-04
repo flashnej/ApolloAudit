@@ -80,6 +80,14 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
               />
         </View>
         <View style={styles.field}>
+          <Text>Existing Qty:</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(val) => setExistingQty(val)}
+            keyboardType='number-pad'
+          />
+        </View>
+        <View style={styles.field}>
         <Text>Proposed: </Text>
           <View style={styles.input}>
             <SelectPicker
@@ -93,6 +101,14 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
               ))}
             </SelectPicker>
           </View>
+        </View>
+        <View style={styles.field}>
+          <Text>Proposed Qty:</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(val) => setProposedQty(val)}
+            keyboardType='number-pad'
+          />
         </View>
         <View style={styles.field}>
           <Text>Voltage: </Text>

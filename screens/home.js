@@ -16,7 +16,7 @@ function Home ({ navigation }) {
         defaultValue= {projectStore.auditDetails.useremail}
         onChangeText={(val) => projectStore.auditDetails.useremail= val} />
         <View style={styles.button}>
-         <Button title='Start a Project' onPress={pressHandler}/>
+         <Button style={styles.button} title='Start a Project' onPress={pressHandler}/>
       </View>
     </View>
   );

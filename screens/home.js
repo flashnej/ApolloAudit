@@ -1,13 +1,15 @@
 import { observer } from 'mobx-react';
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import {projectStore} from './../ProjectStore'
+import SelectPicker from 'react-native-form-select-picker'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function Home ({ navigation }) {
 
-    const pressHandler = () => {
-        navigation.push('NewProject')
-    }
+  const pressHandler = () => {
+      navigation.navigate('NewProject')
+  }
   return (
     <View style={styles.container}>
       <Text>User Email:</Text>
@@ -16,11 +18,13 @@ function Home ({ navigation }) {
         defaultValue= {projectStore.auditDetails.useremail}
         onChangeText={(val) => projectStore.auditDetails.useremail= val} />
         <View style={styles.button}>
-         <Button style={styles.button} title='Start a Project' onPress={pressHandler}/>
+         <TouchableOpacity style={styles.button} onPress={pressHandler}>
+           <Text>Start a Project</Text>
+           </TouchableOpacity>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -33,6 +37,8 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: 'blue',
     color: 'black',
+    padding: 1,
+    margin: 10,
   },
   input: {
     borderWidth: 1,

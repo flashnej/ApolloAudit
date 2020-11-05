@@ -54,7 +54,7 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
   return (
     <View style={styles.container}>
       <View style={styles.image}>
-       <Image source={Logo}/>
+       <Image source={Logo} scale/>
       </View>
       <Text>{projectStore.auditDetails.utility}</Text>
       <Text> {projectStore.auditDetails.projectName}</Text>

@@ -116,7 +116,7 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
           <Text>Existing Qty:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => setExistingQty(val)}
+            onChangeText={(val) => setExistingQty(parseInt(val))}
             keyboardType='number-pad'
           />
         </View>
@@ -139,7 +139,7 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
           <Text>Proposed Qty:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => setProposedQty(val)}
+            onChangeText={(val) => setProposedQty(parseInt(val))}
             keyboardType='number-pad'
           />
         </View>

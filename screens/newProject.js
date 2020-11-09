@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, Keyboard, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
 import {projectStore} from './../ProjectStore'
 import SelectPicker from 'react-native-form-select-picker'
 
@@ -100,7 +100,9 @@ function NewProject({ navigation }) {
           />
         </View>
         <View style={styles.button}>
-         <Button title='Start Audit' onPress={pressHandler}/>
+        <TouchableOpacity style={styles.button} onPress={pressHandler}>
+         <Text>Start a Project</Text>
+        </TouchableOpacity>
       </View>
       </View>
     </TouchableWithoutFeedback>
@@ -125,6 +127,9 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: 'blue',
+    color: 'black',
+    padding: 1,
+    margin: 10,
   }
 });
 

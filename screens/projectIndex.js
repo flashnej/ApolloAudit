@@ -4,6 +4,8 @@ import { observer } from 'mobx-react';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import {projectStore} from './../ProjectStore'
 import Logo from '../assets/Logo.jpg'
+import Plus from '../assets/plus.png'
+import Minus from '../assets/minus.png'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function ProjectIndex({ route, navigation, navigation: { setParams } }) {
@@ -22,11 +24,11 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
     const incrementExistingQty = (data, lineNumber, cellIndex) => (
       <View style={styles.qty}>
       <TouchableOpacity onPress={() => decrease(lineNumber, cellIndex)}>
-          <Text style={styles.downIncrement}>-  </Text>
+        <Image source={Minus} scale/>
       </TouchableOpacity>
       <Text>{data}</Text>
       <TouchableOpacity onPress={() => increase(lineNumber, cellIndex)}>
-        <Text style={styles.upIncrement}>  +</Text>
+      <Image source={Plus} scale/>
       </TouchableOpacity>
       </View>
     )
@@ -34,11 +36,11 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
     const incrementSuggestedQty = (data, lineNumber, cellIndex) => (
       <View style={styles.qty}>
       <TouchableOpacity onPress={() => decrease(lineNumber, cellIndex)}>
-          <Text style={styles.downIncrement}>-  </Text>
+        <Image source={Minus} scale/>
       </TouchableOpacity>
       <Text>{data}</Text>
       <TouchableOpacity onPress={() => increase(lineNumber, cellIndex)}>
-        <Text style={styles.upIncrement}>  +</Text>
+        <Image source={Plus} scale/>
       </TouchableOpacity>
       </View>
     )
@@ -51,9 +53,9 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
       projectStore.auditDetails.lineItems[lineNumber][cellIndex]--
     }
 
-    const editItem = (lineNumber) => (
+    const editItem = (key, lineNumber) => (
       <View style={styles.button}>
-        <TouchableOpacity onPress={() => navigation.navigate('EditLine', {lineNumber})}>
+        <TouchableOpacity onPress={() => navigation.navigate('EditLine', {key: key, lineNumber: lineNumber})}>
           <Text style={{textAlign: 'center'}}>Edit Line</Text>
         </TouchableOpacity>
       </View>
@@ -75,7 +77,7 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
                 <TableWrapper key={lineNumber} style={lineNumber%2 ? styles.lightRow : styles.row}>
                   {
                     lineItem.map((cellData, cellIndex) => (
-                      <Cell key={cellIndex} data={ cellIndex === 3 ? incrementExistingQty(cellData, lineNumber, cellIndex) : cellIndex === 5 ? incrementSuggestedQty(cellData, lineNumber, cellIndex) : cellIndex === 8 ? editItem(lineNumber) : cellData} width={widthArr[cellIndex] }/>
+                      <Cell key={cellIndex} data={ cellIndex === 3 ? incrementExistingQty(cellData, lineNumber, cellIndex) : cellIndex === 5 ? incrementSuggestedQty(cellData, lineNumber, cellIndex) : cellIndex === 8 ? editItem(lineNumber, lineNumber) : cellData} width={widthArr[cellIndex] }/>
                     ))
                   }
                 </TableWrapper>
@@ -123,6 +125,8 @@ const styles = StyleSheet.create({
   },
   qty: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   downIncrement: {
     color: 'red',

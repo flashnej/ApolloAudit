@@ -66,8 +66,6 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
       <View style={styles.image}>
        <Image source={Logo} scale/>
       </View>
-      <Text>{projectStore.auditDetails.utility}</Text>
-      <Text> {projectStore.auditDetails.projectName}</Text>
       <ScrollView horizontal={true}>
         <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
           <Row data={projectStore.auditDetails.tableHeaders} widthArr={widthArr} style={styles.header} textStyle={styles.text}/>

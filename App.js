@@ -10,11 +10,13 @@ import { observer } from 'mobx-react';
 import Logo from './assets/Logo.jpg'
 import {projectStore} from './ProjectStore'
 import Export from './screens/export'
+import EditLine from './screens/editLine'
 
 const Stack = createStackNavigator();
 
 
 function App() {
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -34,6 +36,10 @@ function App() {
       <Stack.Screen
           name="NewItemForm"
           component={NewItemForm}
+        />
+        <Stack.Screen
+          name="EditLine"
+          component={EditLine}
         />
       </Stack.Navigator>
     </NavigationContainer>

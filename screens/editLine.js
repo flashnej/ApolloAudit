@@ -4,15 +4,15 @@ import { projectStore } from './../ProjectStore';
 import { observable, action } from "mobx"
 import SelectPicker from 'react-native-form-select-picker'
 
-function NewItemForm({ route, navigation, navigation: { setParams } }) {
-    const [ location, setLocation ] = useState("")
-    const [ hours, setHours ] = useState("")
-    const [ existingCode, setExistingCode ] = useState("")
-    const [ proposedCode, setProposedCode ] = useState("")
-    const [ existingQty, setExistingQty ] = useState(0)
-    const [ proposedQty, setProposedQty ] = useState(0)
-    const [ volt, setVolt ] = useState("")
-    const [ comments, setComments ] = useState("")
+function EditLine({ route, navigation, navigation: { setParams } }) {
+    const [ location, setLocation ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber[0]])
+    const [ hours, setHours ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][1])
+    const [ existingCode, setExistingCode ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][2])
+    const [ proposedCode, setProposedCode ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][3])
+    const [ existingQty, setExistingQty ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][3])
+    const [ proposedQty, setProposedQty ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][5])
+    const [ volt, setVolt ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][6])
+    const [ comments, setComments ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][7])
 
     const existingOptions = projectStore.existingOptions
 
@@ -23,7 +23,7 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
       proposedOptions = ["A-Line LED"]
     } else if (existingCode === "A-Line 75/100W equivalent") {
       proposedOptions = ["A-Line LED"]
-    } else if (existingCode === "PAR16 or MR16 (pin or GU10 base type)") {
+    } else if (existingCode === "PAR16 or MR16") {
       proposedOptions = ["PAR16 or MR16 LED"]
     } else if (existingCode === "PAR20/R20") {
       proposedOptions = ["PAR20/R20 LED"]
@@ -70,108 +70,116 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
     }
 
     const voltOptions = ["120 / 277", "480"]
+    console.log(route.params.lineNumber)
 
     const pressHandler = ()=> {
       if (location != "" || existingCode != "" || proposedCode != "") {
-        projectStore.auditDetails.lineItems.push([location, hours, existingCode, existingQty, proposedCode,proposedQty, volt, comments, ""])
+        projectStore.auditDetails.lineItems[route.params.lineNumber] = ([location, hours, existingCode, existingQty, proposedCode,proposedQty, volt, comments, ""])
       }
       navigation.navigate('ProjectIndex')
     }
 
-  return (
-    <View style={styles.container}>
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <ScrollView verticle={true}>
+
+    return (
       <View style={styles.container}>
-        <View style={styles.field}>
-          <Text>Location:</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={(val) => setLocation(val)}
-          />
-        </View>
-        <View style={styles.field}>
-          <Text>Existing Fixture: </Text>
-          <View style={styles.input}>
-            <SelectPicker
-              onValueChange={(value) => {
-                setExistingCode(value)
-              }}
-              selected={existingCode}
-              >
-              {Object.values(existingOptions).map((val, index) => (
-                  <SelectPicker.Item label={val} value={val} key={index} />
-              ))}
-            </SelectPicker>
-          </View>
-        </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <ScrollView verticle={true}>
+        <View style={styles.container}>
           <View style={styles.field}>
-            <Text>Hrs/Yr:</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(val) => setHours(val)}
-              />
-        </View>
-        <View style={styles.field}>
-          <Text>Existing Qty:</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={(val) => setExistingQty(val)}
-            keyboardType='number-pad'
-          />
-        </View>
-        <View style={styles.field}>
-        <Text>Proposed: </Text>
-          <View style={styles.input}>
-            <SelectPicker
-              onValueChange={(value) => {
-                setProposedCode(value)
-              }}
-              selected={proposedCode}
-              >
-              {Object.values(proposedOptions).map((val, index) => (
-                  <SelectPicker.Item label={val} value={val} key={index} />
-              ))}
-            </SelectPicker>
-          </View>
-        </View>
-        <View style={styles.field}>
-          <Text>Proposed Qty:</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={(val) => setProposedQty(val)}
-            keyboardType='number-pad'
-          />
-        </View>
-        <View style={styles.field}>
-          <Text>Voltage: </Text>
-          <View style={styles.input}>
-            <SelectPicker
-              onValueChange={(value) => {
-                setVolt(value)
-              }}
-              selected={volt}
-              >
-              {Object.values(voltOptions).map((val, index) => (
-                  <SelectPicker.Item label={val} value={val} key={index} />
-              ))}
-            </SelectPicker>
-          </View>
-        </View>
-        <View style={styles.field}>
-          <Text>Notes: </Text>
+            <Text>Location:</Text>
             <TextInput
               style={styles.input}
-              onChangeText={(val) => setComments(val)}
+              defaultValue = {projectStore.auditDetails.lineItems[route.params.lineNumber][0]}
+              onChangeText={(val) => setLocation(val)}
             />
+          </View>
+          <View style={styles.field}>
+            <Text>Existing Fixture: </Text>
+            <View style={styles.input}>
+              <SelectPicker
+                onValueChange={(value) => {
+                  setExistingCode(value)
+                }}
+                selected={projectStore.auditDetails.lineItems[route.params.lineNumber][2]}
+                >
+                {Object.values(existingOptions).map((val, index) => (
+                    <SelectPicker.Item label={val} value={val} key={index} />
+                ))}
+              </SelectPicker>
+            </View>
+          </View>
+            <View style={styles.field}>
+              <Text>Hrs/Yr:</Text>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={(val) => setHours(val)}
+                  defaultValue = {projectStore.auditDetails.lineItems[route.params.lineNumber][1]}
+                />
+          </View>
+          <View style={styles.field}>
+            <Text>Existing Qty:</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={(val) => setExistingQty(val)}
+              keyboardType='number-pad'
+              defaultValue = {projectStore.auditDetails.lineItems[route.params.lineNumber][3]}
+            />
+          </View>
+          <View style={styles.field}>
+          <Text>Proposed: </Text>
+            <View style={styles.input}>
+              <SelectPicker
+                onValueChange={(value) => {
+                  setProposedCode(value)
+                }}
+                selected={projectStore.auditDetails.lineItems[route.params.lineNumber][3]}
+                >
+                {Object.values(proposedOptions).map((val, index) => (
+                    <SelectPicker.Item label={val} value={val} key={index} />
+                ))}
+              </SelectPicker>
+            </View>
+          </View>
+          <View style={styles.field}>
+            <Text>Proposed Qty:</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={(val) => setProposedQty(val)}
+              keyboardType='number-pad'defaultValue = 
+              {projectStore.auditDetails.lineItems[route.params.lineNumber][5]}
+            />
+          </View>
+          <View style={styles.field}>
+            <Text>Voltage: </Text>
+            <View style={styles.input}>
+              <SelectPicker
+                onValueChange={(value) => {
+                  setVolt(value)
+                }}
+                selected={projectStore.auditDetails.lineItems[route.params.lineNumber][6]}
+                >
+                {Object.values(voltOptions).map((val, index) => (
+                    <SelectPicker.Item label={val} value={val} key={index} />
+                ))}
+              </SelectPicker>
+            </View>
+          </View>
+          <View style={styles.field}>
+            <Text>Notes: </Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={(val) => setComments(val)}
+              defaultValue={projectStore.auditDetails.lineItems[route.params.lineNumber][7]}
+              />
+          </View>
+          <View style={styles.button}>
+           <Button title='Adjust Item' onPress={pressHandler}/>
+          </View>
         </View>
-        <View style={styles.button}>
-         <Button title='Add Item' onPress={pressHandler}/>
-        </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
       </View>
-      </ScrollView>
-    </TouchableWithoutFeedback>
-    </View>
+
   );
 }
 
@@ -201,4 +209,4 @@ const styles = StyleSheet.create({
     width: 50
   }
 });
-export default NewItemForm
+export default EditLine

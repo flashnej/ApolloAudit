@@ -8,14 +8,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function ProjectIndex({ route, navigation, navigation: { setParams } }) {
 
-  let widthArr = [200, 40, 100, 110, 100, 110, 60, 300]
+  let widthArr = [200, 40, 100, 110, 100, 110, 60, 300, 100]
 
     const pressHandler = () => {
         navigation.navigate('NewItemForm')
     }
 
     if (!projectStore.auditDetails.lineItems) {
-      projectStore.auditDetails.tableHeaders = ["Location", "Hrs/Yr", "Existing Code", "Qty", "Proposed Code", "Qty", "Volt", "Notes"]
+      projectStore.auditDetails.tableHeaders = ["Location", "Hrs/Yr", "Existing Code", "Qty", "Proposed Code", "Qty", "Volt", "Notes", "Edit Line"]
       projectStore.auditDetails.lineItems = []
     }
 
@@ -51,6 +51,14 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
       projectStore.auditDetails.lineItems[lineNumber][cellIndex]--
     }
 
+    const editItem = (lineNumber) => (
+      <View style={styles.button}>
+        <TouchableOpacity onPress={() => navigation.navigate('EditLine', {lineNumber})}>
+          <Text style={{textAlign: 'center'}}>Edit Line</Text>
+        </TouchableOpacity>
+      </View>
+    )
+
   return (
     <View style={styles.container}>
       <View style={styles.image}>
@@ -67,7 +75,7 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
                 <TableWrapper key={lineNumber} style={lineNumber%2 ? styles.lightRow : styles.row}>
                   {
                     lineItem.map((cellData, cellIndex) => (
-                      <Cell key={cellIndex} data={ cellIndex === 3 ? incrementExistingQty(cellData, lineNumber, cellIndex) : cellIndex === 5 ? incrementSuggestedQty(cellData, lineNumber, cellIndex) : cellData} width={widthArr[cellIndex] }/>
+                      <Cell key={cellIndex} data={ cellIndex === 3 ? incrementExistingQty(cellData, lineNumber, cellIndex) : cellIndex === 5 ? incrementSuggestedQty(cellData, lineNumber, cellIndex) : cellIndex === 8 ? editItem(lineNumber) : cellData} width={widthArr[cellIndex] }/>
                     ))
                   }
                 </TableWrapper>
@@ -90,6 +98,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: 'blue',
+    padding: 5,
   },
   header: {
     height: 50,

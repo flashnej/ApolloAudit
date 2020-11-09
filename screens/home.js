@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
 import {projectStore} from './../ProjectStore'
 import SelectPicker from 'react-native-form-select-picker'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Logo from '../assets/Logo.jpg'
 
 function Home ({ navigation }) {
 
@@ -12,6 +13,9 @@ function Home ({ navigation }) {
   }
   return (
     <View style={styles.container}>
+      <View style={styles.image}>
+       <Image source={Logo} scale/>
+      </View>
       <Text>User Email:</Text>
       <TextInput
         style={styles.input}
@@ -44,6 +48,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#777',
     width: 200,
+  },
+  image: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 export default observer(Home)

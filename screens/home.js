@@ -8,12 +8,19 @@ import Logo from '../assets/Logo.jpg'
 function Home({ route, navigation, navigation: { setParams } }) {
   const [email, setEmail] = useState('')
 
-  const emailOptions = ['max.flashner@apollolightandsupply.com', 'david.flashner@apollolightandsupply.com', 'jason.flashner@apollolightandsupply.com', 'irvin.toon@apollolightandsupply.com']
-
+  const emailOptions = ['Max Flashner', 'David Flashner', 'Jason Flashner', 'Irvin Toon']
 
     const pressHandler = ()=> {
+      if (email === 'Max Flashner') {
+        projectStore.auditDetails.useremail = 'max.flashner@apollolightandsupply.com'
+      } else if ( email === 'David Flashner') {
+        projectStore.auditDetails.useremail = 'david.flashner@apollolightandsupply.com'
+      } else if ( email === 'Jason Flashner') {
+        projectStore.auditDetails.useremail = 'jason.flashner@apollolightandsupply.com'
+      } else if ( email === 'Irvin Toon') {
+        projectStore.auditDetails.useremail = 'irvin.toon@apollolightandsupply.com'
+      }
       navigation.navigate('NewProject')
-      projectStore.auditDetails.useremail = email
     }
 
 

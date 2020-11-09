@@ -5,7 +5,7 @@ import { observable, action } from "mobx"
 import SelectPicker from 'react-native-form-select-picker'
 
 function EditLine({ route, navigation, navigation: { setParams } }) {
-    const [ location, setLocation ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber[0]])
+    const [ location, setLocation ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][0])
     const [ hours, setHours ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][1])
     const [ existingCode, setExistingCode ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][2])
     const [ proposedCode, setProposedCode ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][3])
@@ -74,7 +74,7 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
 
     const pressHandler = ()=> {
       if (location != "" || existingCode != "" || proposedCode != "") {
-        projectStore.auditDetails.lineItems[route.params.lineNumber] = ([location, hours, existingCode, existingQty, proposedCode,proposedQty, volt, comments, ""])
+        projectStore.auditDetails.lineItems[route.params.lineNumber] = ([location, hours, existingCode, existingQty, proposedCode, proposedQty, volt, comments, ""])
       }
       navigation.navigate('ProjectIndex')
     }
@@ -85,12 +85,12 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <ScrollView verticle={true}>
         <View style={styles.container}>
-          <View style={styles.field}>
+        <View style={styles.field}>
             <Text>Location:</Text>
             <TextInput
               style={styles.input}
-              defaultValue = {projectStore.auditDetails.lineItems[route.params.lineNumber][0]}
               onChangeText={(val) => setLocation(val)}
+              defaultValue = {projectStore.auditDetails.lineItems[route.params.lineNumber][0]}
             />
           </View>
           <View style={styles.field}>
@@ -108,13 +108,13 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
               </SelectPicker>
             </View>
           </View>
-            <View style={styles.field}>
-              <Text>Hrs/Yr:</Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(val) => setHours(val)}
-                  defaultValue = {projectStore.auditDetails.lineItems[route.params.lineNumber][1]}
-                />
+          <View style={styles.field}>
+            <Text>Hrs/Yr:</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={(val) => setHours(val)}
+              defaultValue = {projectStore.auditDetails.lineItems[route.params.lineNumber][1]}
+            />
           </View>
           <View style={styles.field}>
             <Text>Existing Qty:</Text>

@@ -8,7 +8,7 @@ import Logo from '../assets/Logo.jpg'
 function Home({ route, navigation, navigation: { setParams } }) {
   const [email, setEmail] = useState('')
 
-  const emailOptions = ['max.flashner@apollolightandsupply.com', 'david.flashner@apollolightandsupply.com', 'jason.flashner@apollolightandsupply.com']
+  const emailOptions = ['max.flashner@apollolightandsupply.com', 'david.flashner@apollolightandsupply.com', 'jason.flashner@apollolightandsupply.com', 'irvin.toon@apollolightandsupply.com']
 
 
     const pressHandler = ()=> {

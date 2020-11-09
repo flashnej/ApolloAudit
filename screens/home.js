@@ -1,34 +1,51 @@
-import { observer } from 'mobx-react';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
-import {projectStore} from './../ProjectStore'
+import { StyleSheet, Text, View, Button, TouchableWithoutFeedback, Keyboard, TextInput, TouchableOpacity, Image } from 'react-native';
+import { projectStore } from './../ProjectStore';
+import { observer, action } from "mobx"
 import SelectPicker from 'react-native-form-select-picker'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import Logo from '../assets/Logo.jpg'
 
-function Home ({ navigation }) {
+function Home({ route, navigation, navigation: { setParams } }) {
+  const [email, setEmail] = useState('')
 
-  const pressHandler = () => {
+  const emailOptions = ['max.flashner@apollolightandsupply.com', 'david.flashner@apollolightandsupply.com', 'jason.flashner@apollolightandsupply.com']
+
+
+    const pressHandler = ()=> {
       navigation.navigate('NewProject')
-  }
-  return (
+      projectStore.auditDetails.useremail = email
+    }
+
+
+    return (
     <View style={styles.container}>
       <View style={styles.image}>
-       <Image source={Logo} scale/>
+        <Image source={Logo} scale/>
       </View>
-      <Text>User Email:</Text>
-      <TextInput
-        style={styles.input}
-        defaultValue= {projectStore.auditDetails.useremail}
-        onChangeText={(val) => projectStore.auditDetails.useremail= val} />
-        <View style={styles.button}>
-         <TouchableOpacity style={styles.button} onPress={pressHandler}>
-           <Text>Start a Project</Text>
-           </TouchableOpacity>
+      <View style={styles.field}>
+        <Text>Email: </Text>
+        <View style={styles.input}>
+          <SelectPicker
+            onValueChange={(value) => {
+              setEmail(value)
+            }}
+            selected={email}
+            >
+            {Object.values(emailOptions).map((val, index) => (
+                <SelectPicker.Item label={val} value={val} key={index} />
+            ))}
+          </SelectPicker>
+        </View>
+      </View>
+
+      <View style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={pressHandler}>
+         <Text>Start a Project</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -54,4 +71,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-export default observer(Home)
+export default Home

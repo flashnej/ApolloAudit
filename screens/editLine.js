@@ -25,7 +25,7 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
       proposedOptions = ["A-Line LED"]
     } else if (existingCode === "PAR16 or MR16") {
       proposedOptions = ["PAR16 or MR16 LED"]
-    } else if (existingCode === "PAR20/R20") {
+    } else if (existingCode === "PAR20/R20PAR16 or MR16 (pin or GU10 base type)") {
       proposedOptions = ["PAR20/R20 LED"]
     } else if (existingCode === "PAR30 or BR30 or R30") {
       proposedOptions = ["PAR30 or BR30 or R30 LED"]

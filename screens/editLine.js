@@ -114,6 +114,7 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
               style={styles.input}
               onChangeText={(val) => setHours(val)}
               defaultValue = {projectStore.auditDetails.lineItems[route.params.lineNumber][1]}
+              keyboardType='number-pad'
             />
           </View>
           <View style={styles.field}>

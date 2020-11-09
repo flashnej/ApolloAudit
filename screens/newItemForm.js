@@ -110,6 +110,7 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
               <TextInput
                 style={styles.input}
                 onChangeText={(val) => setHours(val)}
+                keyboardType='number-pad'
               />
         </View>
         <View style={styles.field}>

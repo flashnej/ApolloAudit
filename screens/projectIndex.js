@@ -85,7 +85,9 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
         </Table>
       </ScrollView>
       <View style={styles.button}>
-      <Button title='Add item' onPress={pressHandler}/>
+        <TouchableOpacity style={styles.button} onPress={pressHandler}>
+         <Text style={styles.buttonText}>Add Item</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -96,10 +98,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  button: {
-    backgroundColor: 'blue',
-    padding: 5,
-  },
   header: {
     height: 50,
     backgroundColor: '#537791'
@@ -108,6 +106,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
     fontSize: 20,
+  },
+  button: {
+    backgroundColor: 'blue',
+    padding: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '900',
   },
   image: {
     alignItems: 'center',

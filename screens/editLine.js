@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TouchableWithoutFeedback, Keyboard, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard, TextInput, ScrollView } from 'react-native';
 import { projectStore } from './../ProjectStore';
 import { observable, action } from "mobx"
 import SelectPicker from 'react-native-form-select-picker'
@@ -174,8 +174,10 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
               />
           </View>
           <View style={styles.button}>
-           <Button title='Adjust Item' onPress={pressHandler}/>
-          </View>
+          <TouchableOpacity style={styles.button} onPress={pressHandler}>
+           <Text style={styles.buttonText}>Add Item</Text>
+          </TouchableOpacity>
+        </View>
         </View>
         </ScrollView>
       </TouchableWithoutFeedback>
@@ -193,6 +195,14 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: 'blue',
+    color: 'black',
+    padding: 1,
+    margin: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '900',
   },
   field: {
     flexDirection:'row',

@@ -47,7 +47,7 @@ function Home({ route, navigation, navigation: { setParams } }) {
 
       <View style={styles.button}>
         <TouchableOpacity style={styles.button} onPress={pressHandler}>
-         <Text>Start a Project</Text>
+         <Text style={styles.buttonText}>Start a Project</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -67,6 +67,11 @@ const styles = StyleSheet.create({
     color: 'black',
     padding: 1,
     margin: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '900',
   },
   input: {
     borderWidth: 1,

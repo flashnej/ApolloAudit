@@ -30,7 +30,7 @@ function Home({ route, navigation, navigation: { setParams } }) {
         <Image source={Logo} scale/>
       </View>
       <View style={styles.field}>
-        <Text>Email: </Text>
+        <Text>Auditor: </Text>
         <View style={styles.input}>
           <SelectPicker
             onValueChange={(value) => {

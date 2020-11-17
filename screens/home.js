@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Alert } from 'react-native';
 import { projectStore } from './../ProjectStore';
 import { observer, action } from "mobx"
 import SelectPicker from 'react-native-form-select-picker'
@@ -13,14 +13,23 @@ function Home({ route, navigation, navigation: { setParams } }) {
     const pressHandler = ()=> {
       if (email === 'Max Flashner') {
         projectStore.auditDetails.useremail = 'max.flashner@apollolightandsupply.com'
+        projectStore.auditDetails.user = 'max_flashner'
       } else if ( email === 'David Flashner') {
         projectStore.auditDetails.useremail = 'david.flashner@apollolightandsupply.com'
+        projectStore.auditDetails.user = 'david_flashner'
       } else if ( email === 'Jason Flashner') {
         projectStore.auditDetails.useremail = 'jason.flashner@apollolightandsupply.com'
+        projectStore.auditDetails.user = 'jason_flashner'
       } else if ( email === 'Irvin Toon') {
         projectStore.auditDetails.useremail = 'irvin.toon@apollolightandsupply.com'
+        projectStore.auditDetails.user = 'irvin_toon'
       }
-      navigation.navigate('NewProject')
+      if (projectStore.auditDetails.useremail) {
+          navigation.navigate('SelectProject')
+          navigation.navigate('SelectProject', {user: projectStore.auditDetails.user})
+      } else {
+        Alert.alert("Select an Auditor");
+      }
     }
 
 
@@ -47,7 +56,7 @@ function Home({ route, navigation, navigation: { setParams } }) {
 
       <View style={styles.button}>
         <TouchableOpacity style={styles.button} onPress={pressHandler}>
-         <Text style={styles.buttonText}>Start a Project</Text>
+         <Text style={styles.buttonText}>View Projects</Text>
         </TouchableOpacity>
       </View>
     </View>

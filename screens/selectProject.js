@@ -6,6 +6,8 @@ import SelectPicker from 'react-native-form-select-picker'
 function SelectProject({ route, navigation }) {
   const [ projectsArray, setProjectsArray ] = useState([])
 
+  const user = projectStore.auditDetails.user
+
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/projects/${route.params.user}`)
     .then((response) => {
@@ -19,13 +21,24 @@ function SelectProject({ route, navigation }) {
     })
     .then((response) => response.json())
     .then((body) => {
-        setProjectsArray(body.projects)
+      setProjectsArray(body.projects)
     })
     .catch((error) => console.error(`Error in fetch: ${error.message}`));
     }, []);
 
     const editProject = (project) => {
-        navigation.navigate('EditProject', {project: project})
+      if (project.auditor) {
+        projectStore.reset()
+        projectStore.auditDetails = project
+        projectStore.auditDetails.user = user
+        projectStore.auditDetails.newProject = false
+        navigation.navigate('EditProject')
+      } else {
+        projectStore.reset()
+        projectStore.auditDetails.user = user
+        projectStore.auditDetails.newProject = true
+        navigation.navigate('EditProject')
+      }
     }
 
     let projectNames = <Text></Text>
@@ -36,26 +49,20 @@ function SelectProject({ route, navigation }) {
             return (
                 <View>
                     <TouchableOpacity style={styles.existingProject} onPress={() => editProject(project)}>
-                        <Text>{project["name"]}</Text>
+                        <Text>{project["project_name"]}</Text>
                     </TouchableOpacity>
                 </View>
             )
         })
     }
 
-  const pressHandler = () => {
-    navigation.navigate('NewProject')
-  }
-
-  console.log(route.params.user)
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
           <Text>hi</Text>
           {projectNames}
-          <TouchableOpacity style={styles.button} onPress={pressHandler}>
-           <Text style={styles.buttonText}>Start a Project</Text>
+          <TouchableOpacity style={styles.button} onPress={editProject}>
+           <Text style={styles.buttonText}>New Project</Text>
           </TouchableOpacity>
       </View>
     </TouchableWithoutFeedback>

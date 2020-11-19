@@ -73,7 +73,7 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
 
     const pressHandler = ()=> {
       if (location != "" || existingCode != "" || proposedCode != "") {
-        projectStore.auditDetails.lineItems.push([location, hours, existingCode, existingQty, proposedCode,proposedQty, volt, comments, ""])
+        projectStore.auditDetails.line_items.push([location, hours, existingCode, existingQty, proposedCode,proposedQty, volt, comments, ""])
       }
       navigation.navigate('ProjectIndex')
     }

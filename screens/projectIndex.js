@@ -16,9 +16,9 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
         navigation.navigate('NewItemForm')
     }
 
-    if (!projectStore.auditDetails.lineItems) {
+    if (!projectStore.auditDetails.line_items) {
       projectStore.auditDetails.tableHeaders = ["Location", "Hrs/Yr", "Existing Code", "Qty", "Proposed Code", "Qty", "Volt", "Notes", "Edit Line"]
-      projectStore.auditDetails.lineItems = []
+      projectStore.auditDetails.line_items = []
     }
 
     const incrementExistingQty = (data, lineNumber, cellIndex) => (
@@ -46,11 +46,11 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
     )
 
     const increase = (lineNumber, cellIndex) => {
-      projectStore.auditDetails.lineItems[lineNumber][cellIndex]++
+      projectStore.auditDetails.line_items[lineNumber][cellIndex]++
     }
 
     const decrease = (lineNumber, cellIndex) => {
-      projectStore.auditDetails.lineItems[lineNumber][cellIndex]--
+      projectStore.auditDetails.line_items[lineNumber][cellIndex]--
     }
 
     const editItem = (key, lineNumber) => (
@@ -71,7 +71,7 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
           <Row data={projectStore.auditDetails.tableHeaders} widthArr={widthArr} style={styles.header} textStyle={styles.text}/>
           <ScrollView verticle={true}>
             {
-              projectStore.auditDetails.lineItems.map((lineItem, lineNumber) => (
+              projectStore.auditDetails.line_items.map((lineItem, lineNumber) => (
                 <TableWrapper key={lineNumber} style={lineNumber%2 ? styles.lightRow : styles.row}>
                   {
                     lineItem.map((cellData, cellIndex) => (

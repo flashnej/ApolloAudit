@@ -170,7 +170,7 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
           </View>
           <View style={styles.button}>
           <TouchableOpacity style={styles.button} onPress={pressHandler}>
-           <Text style={styles.buttonText}>Add Item</Text>
+           <Text style={styles.buttonText}>Adjust Line</Text>
           </TouchableOpacity>
         </View>
         </View>

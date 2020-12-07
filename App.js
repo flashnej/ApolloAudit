@@ -9,6 +9,7 @@ import { observer } from 'mobx-react';
 import {projectStore} from './ProjectStore'
 import Export from './screens/export'
 import EditLine from './screens/editLine'
+import SelectProject from './screens/selectProject'
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,10 @@ function App() {
         <Stack.Screen
           name="EditLine"
           component={EditLine}
+        />
+        <Stack.Screen
+          name="SelectProject"
+          component={SelectProject}
         />
       </Stack.Navigator>
     </NavigationContainer>

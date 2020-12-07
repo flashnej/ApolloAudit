@@ -17,7 +17,6 @@ function ProjectIndex({ route, navigation, navigation: { setParams } }) {
     }
 
     if (!projectStore.auditDetails.lineItems) {
-      projectStore.auditDetails.tableHeaders = ["Location", "Hrs/Yr", "Existing Code", "Qty", "Proposed Code", "Qty", "Volt", "Notes", "Edit Line"]
       projectStore.auditDetails.lineItems = []
     }
 

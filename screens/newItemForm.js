@@ -73,7 +73,7 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
 
     const pressHandler = ()=> {
       if (location != "" || existingCode != "" || proposedCode != "") {
-        projectStore.auditDetails.lineItems.push([location, hours, existingCode, existingQty, proposedCode,proposedQty, volt, comments, ""])
+        projectStore.auditDetails.lineItems.push([location, hours, existingCode, parseInt(existingQty), proposedCode, parseInt(proposedQty), volt, comments, ""])
       }
       navigation.navigate('ProjectIndex')
     }
@@ -117,7 +117,7 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
           <Text>Existing Qty:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => setExistingQty(parseInt(val))}
+            onChangeText={(val) => setExistingQty(val)}
             keyboardType='number-pad'
           />
         </View>
@@ -140,7 +140,7 @@ function NewItemForm({ route, navigation, navigation: { setParams } }) {
           <Text>Proposed Qty:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(val) => setProposedQty(parseInt(val))}
+            onChangeText={(val) => setProposedQty(val)}
             keyboardType='number-pad'
           />
         </View>

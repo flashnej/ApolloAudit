@@ -5,15 +5,17 @@ import { observable, action } from "mobx"
 import SelectPicker from 'react-native-form-select-picker'
 
 function EditLine({ route, navigation, navigation: { setParams } }) {
+    let line = projectStore.auditDetails.lineItems[route.params.lineNumber]
     const [ location, setLocation ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][0])
     const [ hours, setHours ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][1])
     const [ existingCode, setExistingCode ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][2])
-    const [ proposedCode, setProposedCode ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][3])
-    const [ existingQty, setExistingQty ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][3])
-    const [ proposedQty, setProposedQty ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][5])
+    const [ proposedCode, setProposedCode ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][4])
+    const [ existingQty, setExistingQty ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][3].toString())
+    const [ proposedQty, setProposedQty ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][5].toString())
     const [ volt, setVolt ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][6])
     const [ comments, setComments ] = useState(projectStore.auditDetails.lineItems[route.params.lineNumber][7])
 
+    //location, hours, existingCode, existingQty, proposedCode,proposedQty, volt, comments, ""
     const existingOptions = projectStore.existingOptions
 
     let proposedOptions = []
@@ -70,11 +72,10 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
     }
 
     const voltOptions = ["120 / 277", "480"]
-    console.log(route.params.lineNumber)
 
     const pressHandler = ()=> {
       if (location != "" || existingCode != "" || proposedCode != "") {
-        projectStore.auditDetails.lineItems[route.params.lineNumber] = ([location, hours, existingCode, existingQty, proposedCode, proposedQty, volt, comments, ""])
+        projectStore.auditDetails.lineItems[route.params.lineNumber] = [location, hours, existingCode, parseInt(existingQty), proposedCode, parseInt(proposedQty), volt, comments, ""]
       }
       navigation.navigate('ProjectIndex')
     }
@@ -90,17 +91,15 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
             <TextInput
               style={styles.input}
               onChangeText={(val) => setLocation(val)}
-              defaultValue = {projectStore.auditDetails.lineItems[route.params.lineNumber][0]}
+              defaultValue = {location}
             />
           </View>
           <View style={styles.field}>
             <Text>Existing Fixture: </Text>
             <View style={styles.input}>
               <SelectPicker
-                onValueChange={(value) => {
-                  setExistingCode(value)
-                }}
-                selected={projectStore.auditDetails.lineItems[route.params.lineNumber][2]}
+                onValueChange={(value) => setExistingCode(value) }
+                selected={existingCode}
                 >
                 {Object.values(existingOptions).map((val, index) => (
                     <SelectPicker.Item label={val} value={val} key={index} />
@@ -113,7 +112,7 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
             <TextInput
               style={styles.input}
               onChangeText={(val) => setHours(val)}
-              defaultValue = {projectStore.auditDetails.lineItems[route.params.lineNumber][1]}
+              defaultValue = {hours}
               keyboardType='number-pad'
             />
           </View>
@@ -121,19 +120,17 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
             <Text>Existing Qty:</Text>
             <TextInput
               style={styles.input}
+              defaultValue = {existingQty}
               onChangeText={(val) => setExistingQty(val)}
               keyboardType='number-pad'
-              defaultValue = {projectStore.auditDetails.lineItems[route.params.lineNumber][3]}
             />
           </View>
           <View style={styles.field}>
           <Text>Proposed: </Text>
             <View style={styles.input}>
               <SelectPicker
-                onValueChange={(value) => {
-                  setProposedCode(value)
-                }}
-                selected={projectStore.auditDetails.lineItems[route.params.lineNumber][3]}
+                onValueChange={(value) => setProposedCode(value)}
+                selected={proposedCode}
                 >
                 {Object.values(proposedOptions).map((val, index) => (
                     <SelectPicker.Item label={val} value={val} key={index} />
@@ -146,17 +143,15 @@ function EditLine({ route, navigation, navigation: { setParams } }) {
             <TextInput
               style={styles.input}
               onChangeText={(val) => setProposedQty(val)}
-              keyboardType='number-pad'defaultValue = 
-              {projectStore.auditDetails.lineItems[route.params.lineNumber][5]}
+              keyboardType='number-pad'
+              defaultValue = {proposedQty}
             />
           </View>
           <View style={styles.field}>
             <Text>Voltage: </Text>
             <View style={styles.input}>
               <SelectPicker
-                onValueChange={(value) => {
-                  setVolt(value)
-                }}
+                onValueChange={(value) => setVolt(value)}
                 selected={projectStore.auditDetails.lineItems[route.params.lineNumber][6]}
                 >
                 {Object.values(voltOptions).map((val, index) => (

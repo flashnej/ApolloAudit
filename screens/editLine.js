@@ -189,10 +189,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    backgroundColor: 'blue',
-    color: 'black',
+    backgroundColor: 'green',
     padding: 1,
     margin: 10,
+    borderRadius: 7,
   },
   buttonText: {
     color: 'white',

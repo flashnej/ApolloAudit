@@ -101,7 +101,7 @@ function NewProject({ navigation }) {
         </View>
         <View style={styles.button}>
           <TouchableOpacity style={styles.button} onPress={pressHandler}>
-           <Text style={styles.buttonText}>Start a Project</Text>
+           <Text style={styles.buttonText}>Create Project</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -126,10 +126,10 @@ const styles = StyleSheet.create({
     width: 200,
   },
   button: {
-    backgroundColor: 'blue',
-    color: 'black',
+    backgroundColor: 'green',
     padding: 1,
     margin: 10,
+    borderRadius: 7,
   },
   buttonText: {
     color: 'white',

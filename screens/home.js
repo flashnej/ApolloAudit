@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   button: {
-    backgroundColor: 'blue',
-    color: 'black',
-    padding: 1,
+    backgroundColor: 'green',
     margin: 10,
+    // marginTop:100,
+    borderRadius: 7,
   },
   buttonText: {
     color: 'white',

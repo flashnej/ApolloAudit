@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
 import {projectStore} from './../ProjectStore'
-import SelectPicker from 'react-native-form-select-picker'
+import ProjectDetailsTile from './projectDetailsTile'
 
 function SelectProject({ route, navigation }) {
   const [ projectsArray, setProjectsArray ] = useState([])
@@ -26,15 +26,16 @@ function SelectProject({ route, navigation }) {
 
     let projectNames = <Text></Text>
     if (projectsArray !== []) {
+      projectNames = projectsArray.map((project) => (
+        <ProjectDetailsTile key={project.id} project={project} />
+      ))
         // projectNames = <Text>{projectsArray[0]["name"]}</Text>
         // console.log(projectsArray[0]["name"] + "test")
     }
 
-  const pressHandler = () => {
+  const pressHandler = () => (
     navigation.navigate('NewProject')
-  }
-
-  console.log(route.params.user)
+  )
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -65,10 +66,10 @@ const styles = StyleSheet.create({
     width: 200,
   },
   button: {
-    backgroundColor: 'blue',
-    color: 'black',
-    padding: 1,
+    backgroundColor: 'green',
+    padding: 10,
     margin: 10,
+    borderRadius: 7,
   },
   buttonText: {
     color: 'white',

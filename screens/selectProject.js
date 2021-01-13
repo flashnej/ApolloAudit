@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
 import {projectStore} from './../ProjectStore'
-import ProjectDetailsTile from './projectDetailsTile'
 
 function SelectProject({ route, navigation }) {
   const [ projectsArray, setProjectsArray ] = useState([])
@@ -27,21 +26,25 @@ function SelectProject({ route, navigation }) {
     let projectNames = <Text></Text>
     if (projectsArray !== []) {
       projectNames = projectsArray.map((project) => (
-        <ProjectDetailsTile key={project.id} project={project} />
+        <View onPress={existingPressHandler(project)} key={project.id}>
+         <Text>{project.name}</Text>
+      </View>
       ))
-        // projectNames = <Text>{projectsArray[0]["name"]}</Text>
-        // console.log(projectsArray[0]["name"] + "test")
     }
-
-  const pressHandler = () => (
+  
+  const newPressHandler = () => (
     navigation.navigate('NewProject')
   )
+
+  const existingPressHandler = (project) => {
+    navigation.navigate('NewProject', {key: project.id, project: project})
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
           {projectNames}
-          <TouchableOpacity style={styles.button} onPress={pressHandler}>
+          <TouchableOpacity style={styles.button} onPress={newPressHandler}>
            <Text style={styles.buttonText}>Start a Project</Text>
           </TouchableOpacity>
       </View>

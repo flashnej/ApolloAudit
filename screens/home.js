@@ -25,8 +25,7 @@ function Home({ route, navigation, navigation: { setParams } }) {
         projectStore.auditDetails.user = 'irvin_toon'
       }
       if (projectStore.auditDetails.useremail) {
-          navigation.navigate('SelectProject')
-          navigation.navigate('SelectProject', {user: projectStore.auditDetails.user})
+          navigation.navigate('NewProject')
       } else {
         Alert.alert("Select an Auditor");
       }

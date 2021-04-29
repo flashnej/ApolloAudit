@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
 import {projectStore} from './../ProjectStore'
+import ProjectTile from './projectTile'
 import SelectPicker from 'react-native-form-select-picker'
 
 function SelectProject({ route, navigation }) {
   const [ projectsArray, setProjectsArray ] = useState([])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/projects/${route.params.user}`)
+    fetch(`http://localhost:3000/api/v1/users/${route.params.user}`)
     .then((response) => {
         if (response.ok) {
         return response;
@@ -24,17 +25,17 @@ function SelectProject({ route, navigation }) {
     .catch((error) => console.error(`Error in fetch: ${error.message}`));
     }, []);
 
-    let projectNames = <Text></Text>
+    let projectNames
     if (projectsArray !== []) {
-        // projectNames = <Text>{projectsArray[0]["name"]}</Text>
-        // console.log(projectsArray[0]["name"] + "test")
+      projectNames = projectsArray.map((project, index) => {
+        return <ProjectTile 
+        project={project}/>
+      })
     }
 
   const pressHandler = () => {
     navigation.navigate('NewProject')
   }
-
-  console.log(route.params.user)
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

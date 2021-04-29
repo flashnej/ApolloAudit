@@ -7,8 +7,8 @@ function Export ({ navigation }) {
 
     const pressHandler = () => {
         console.log("Exporting to Excel...")
-        fetch('https://fathomless-fortress-53529.herokuapp.com/api/v1/projects', {
-        // fetch('http://localhost:3000/api/v1/projects', {
+        // fetch('https://fathomless-fortress-53529.herokuapp.com/api/v1/projects', {
+        fetch('http://localhost:3000/api/v1/projects', {
           method: 'POST',
           headers: {
             Accept: 'application/json',

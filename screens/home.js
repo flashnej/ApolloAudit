@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Alert, TextInput } from 'react-native';
 import { projectStore } from './../ProjectStore';
 import { observer, action } from "mobx"
 import SelectPicker from 'react-native-form-select-picker'
@@ -36,26 +36,18 @@ function Home({ route, navigation, navigation: { setParams } }) {
     <View style={styles.container}>
       <View style={styles.image}>
         <Image source={Logo} scale/>
+        <Text>{email}</Text>
       </View>
       <View style={styles.field}>
-        <Text>Auditor: </Text>
-        <View style={styles.input}>
-          <SelectPicker
-            onValueChange={(value) => {
-              setEmail(value)
-            }}
-            selected={email}
-            >
-            {Object.values(emailOptions).map((val, index) => (
-                <SelectPicker.Item label={val} value={val} key={index} />
-            ))}
-          </SelectPicker>
-        </View>
+        <TextInput
+        style={styles.input}
+        onChangeText={(val) => setEmail(val)}
+        />
       </View>
 
       <View style={styles.button}>
         <TouchableOpacity style={styles.button} onPress={pressHandler}>
-         <Text style={styles.buttonText}>View Projects</Text>
+         <Text style={styles.buttonText}>NewProject</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -81,7 +73,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '900',
   },
-  input: {
+  input: {  
     borderWidth: 1,
     borderColor: '#777',
     width: 200,

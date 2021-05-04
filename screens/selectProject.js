@@ -6,6 +6,7 @@ import SelectPicker from 'react-native-form-select-picker'
 
 function SelectProject({ route, navigation }) {
   const [ projectsArray, setProjectsArray ] = useState([])
+  const [ redirect, setRedirect ] = useState(false)
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/users/${route.params.user}`)
@@ -23,18 +24,40 @@ function SelectProject({ route, navigation }) {
         setProjectsArray(body.projects)
     })
     .catch((error) => console.error(`Error in fetch: ${error.message}`));
-    }, []);
+  }, []);
 
-    let projectNames
-    if (projectsArray !== []) {
-      projectNames = projectsArray.map((project, index) => {
-        return <ProjectTile 
-        project={project}/>
-      })
-    }
+  let handleProjectUpdate = (projectUpdate) => {
+      projectStore.auditDetails.projectName = projectUpdate["name"]
+      projectStore.auditDetails.clientName
+      projectStore.auditDetails.contactName = projectUpdate["contact_name"]
+      projectStore.auditDetails.phoneNumber = projectUpdate["phone_number"]
+      projectStore.auditDetails.address = projectUpdate["address"]
+      projectStore.auditDetails.city = projectUpdate["city"]
+      projectStore.auditDetails.sqFt = projectUpdate["sq_ft"]
+      projectStore.auditDetails.utility = projectUpdate["utility"]
+      projectStore.auditDetails.acctNum = projectUpdate["account_number"]
+      setRedirect(true)
+  }
 
   const pressHandler = () => {
+    setRedirect(true)
+  }
+
+  if(redirect === true) {
     navigation.navigate('NewProject')
+  }
+
+  let projectNames
+  if (projectsArray !== []) {
+    projectNames = projectsArray.map((project, index) => {
+        return <View >
+            <ProjectTile 
+              key={project["id"]}
+              project={project}
+              handleProjectUpdate={handleProjectUpdate}
+            />
+        </View>
+    })
   }
 
   return (

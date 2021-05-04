@@ -42,13 +42,10 @@ function Home({ route, navigation, navigation: { setParams } }) {
         <Text>Auditor: </Text>
         <View style={styles.input}>
           <SelectPicker
-            onValueChange={(value) => {
-              setEmail(value)
-            }}
+            onValueChange={(value) => {setEmail(value)}}
             selected={email}
-            >
-            {Object.values(emailOptions).map((val, index) => (
-                <SelectPicker.Item label={val} value={val} key={index} />
+          >
+          {Object.values(emailOptions).map((val, index) => (<SelectPicker.Item label={val} value={val} key={index} />
             ))}
           </SelectPicker>
         </View>

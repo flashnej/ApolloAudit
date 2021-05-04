@@ -1,16 +1,25 @@
 import { observer } from 'mobx-react';
 import React, { useContext } from 'react';
 import { StyleSheet, View, Text, Button, Alert, TouchableHighlight } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import {projectStore} from './../ProjectStore'
 
-function ProjectTile ( params) {
+function ProjectTile ( props ) {
+  
+  let project = props["project"]
+
+  const pressHandler = ()=> {
+    props.handleProjectUpdate(project)
+  }
+
 
   return (
-      <View>
-          <TouchableHighlight onPress={console.log("PRESSED")}>
-            <Text>{params["project"]["name"]}</Text>
-          </TouchableHighlight>
-      </View>
+      <TouchableOpacity onPress={pressHandler} >
+        <View>
+          <Text>{project["name"]}</Text>
+        </View>
+      </TouchableOpacity>
+      
   );
 }
 

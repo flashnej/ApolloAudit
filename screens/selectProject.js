@@ -39,7 +39,7 @@ function SelectProject({ route, navigation }) {
   if (projectsArray !== []) {
     projectNames = projectsArray.map((project, index) => {
         return <ProjectTile 
-              key={project["id"]}
+              key={index}
               project={project}
               pressHandler={(projectUpdate) => pressHandler(projectUpdate)}
             />

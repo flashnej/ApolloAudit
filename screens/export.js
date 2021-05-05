@@ -9,6 +9,14 @@ function Export ({ navigation }) {
       if (projectStore.auditDetails.id > 0) {
         // UPDATE request.
         console.log("updating project...")
+        fetch(`http://localhost:3000/api/v1/projects/${projectStore.auditDetails.id}`, {
+          method: 'PUT',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(projectStore.auditDetails)
+        })
       } else {
         console.log("Creating Project and Exporting to Excel...")
         // fetch('https://fathomless-fortress-53529.herokuapp.com/api/v1/projects', {

@@ -1,12 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
 import {projectStore} from './../ProjectStore'
 import SelectPicker from 'react-native-form-select-picker'
 
-function NewProject({ navigation }) {
+function NewProject({ route, navigation }) {
   const [ utility, setUtility ] = useState('')
 
   const utilityOptions = ["Eversource", "National Grid", "Other"]
+
+  if (route.params.project.NewProject) {
+    projectStore.auditDetails.id = -1
+    projectStore.auditDetails.projectName = ""
+    projectStore.auditDetails.clientName = ""
+    projectStore.auditDetails.contactName = ""
+    projectStore.auditDetails.phoneNumber = ""
+    projectStore.auditDetails.address = ""
+    projectStore.auditDetails.city = ""
+    projectStore.auditDetails.sqFt = ""
+    projectStore.auditDetails.utility = ""
+    projectStore.auditDetails.acctNum = ""
+  } else {
+    projectStore.auditDetails.id = route.params.project["id"]
+    projectStore.auditDetails.projectName = route.params.project["name"]
+    projectStore.auditDetails.clientName = route.params.project[""]
+    projectStore.auditDetails.contactName = route.params.project["contact_name"]
+    projectStore.auditDetails.phoneNumber = route.params.project["phone_number"]
+    projectStore.auditDetails.address = route.params.project["address"]
+    projectStore.auditDetails.city = route.params.project["city"]
+    projectStore.auditDetails.sqFt = route.params.project["sq_ft"]
+    projectStore.auditDetails.utility = route.params.project["utility"]
+    projectStore.auditDetails.acctNum = route.params.project["account_number"]
+  }
 
   const pressHandler = () => {
     navigation.navigate('ProjectIndex')
@@ -26,7 +50,7 @@ function NewProject({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
-        <Text>{projectStore.projectName}</Text>
+        <Text>{projectStore.auditDetails.projectName}</Text>
         <View style={styles.field}>
           <Text>Project Name:</Text>
           <TextInput

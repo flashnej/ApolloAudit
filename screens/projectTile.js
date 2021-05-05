@@ -8,13 +8,13 @@ function ProjectTile ( props ) {
   
   let project = props["project"]
 
-  const pressHandler = ()=> {
-    props.handleProjectUpdate(project)
+  const pressHandler = () => {
+    props.pressHandler(project)
   }
 
 
   return (
-      <TouchableOpacity onPress={pressHandler} >
+      <TouchableOpacity onPress={() => pressHandler()} >
         <View>
           <Text>{project["name"]}</Text>
         </View>

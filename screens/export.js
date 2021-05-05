@@ -6,7 +6,11 @@ import {projectStore} from './../ProjectStore'
 function Export ({ navigation }) {
 
     const pressHandler = () => {
-        console.log("Exporting to Excel...")
+      if (projectStore.auditDetails.id > 0) {
+        // UPDATE request.
+        console.log("updating project...")
+      } else {
+        console.log("Creating Project and Exporting to Excel...")
         // fetch('https://fathomless-fortress-53529.herokuapp.com/api/v1/projects', {
         fetch('http://localhost:3000/api/v1/projects', {
           method: 'POST',
@@ -27,7 +31,8 @@ function Export ({ navigation }) {
             { text: "OK", onPress: () => console.log("OK Pressed") }
           ],
           { cancelable: false }
-        );
+        ); 
+      }
     }
 
   return (

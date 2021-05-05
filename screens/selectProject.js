@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
 import {projectStore} from './../ProjectStore'
 import ProjectTile from './projectTile'
-import SelectPicker from 'react-native-form-select-picker'
 
 function SelectProject({ route, navigation }) {
   const [ projectsArray, setProjectsArray ] = useState([])
   const [ redirect, setRedirect ] = useState(false)
+  const [ selectedProject, setSelectedProject ] = useState({})
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/users/${route.params.user}`)
@@ -26,37 +26,23 @@ function SelectProject({ route, navigation }) {
     .catch((error) => console.error(`Error in fetch: ${error.message}`));
   }, []);
 
-  let handleProjectUpdate = (projectUpdate) => {
-      projectStore.auditDetails.projectName = projectUpdate["name"]
-      projectStore.auditDetails.clientName
-      projectStore.auditDetails.contactName = projectUpdate["contact_name"]
-      projectStore.auditDetails.phoneNumber = projectUpdate["phone_number"]
-      projectStore.auditDetails.address = projectUpdate["address"]
-      projectStore.auditDetails.city = projectUpdate["city"]
-      projectStore.auditDetails.sqFt = projectUpdate["sq_ft"]
-      projectStore.auditDetails.utility = projectUpdate["utility"]
-      projectStore.auditDetails.acctNum = projectUpdate["account_number"]
-      setRedirect(true)
-  }
-
-  const pressHandler = () => {
+  const pressHandler = (projectUpdate) => {
+    setSelectedProject(projectUpdate)
     setRedirect(true)
   }
 
   if(redirect === true) {
-    navigation.navigate('NewProject')
+    navigation.navigate('NewProject', {project: selectedProject})
   }
 
   let projectNames
   if (projectsArray !== []) {
     projectNames = projectsArray.map((project, index) => {
-        return <View >
-            <ProjectTile 
+        return <ProjectTile 
               key={project["id"]}
               project={project}
-              handleProjectUpdate={handleProjectUpdate}
+              pressHandler={(projectUpdate) => pressHandler(projectUpdate)}
             />
-        </View>
     })
   }
 
@@ -64,7 +50,7 @@ function SelectProject({ route, navigation }) {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
           {projectNames}
-          <TouchableOpacity style={styles.button} onPress={pressHandler}>
+          <TouchableOpacity style={styles.button} onPress={()=>pressHandler({newProject: true})}>
            <Text style={styles.buttonText}>Start a Project</Text>
           </TouchableOpacity>
       </View>
